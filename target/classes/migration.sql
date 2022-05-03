@@ -1,0 +1,42 @@
+
+CREATE DATABASE SearchEngine;
+
+CREATE TABLE Category(
+    ID INT AUTO_INCREMENT,
+    NAME VARCHAR(40) NOT NULL,
+    DESCRIPTION VARCHAR(200),
+    PRIMARY KEY(ID)
+);
+
+CREATE TABLE FirstLink(
+    ID INT AUTO_INCREMENT,
+    LINK VARCHAR(200),
+    DESCRIPTION VARCHAR(200),
+    PRIMARY KEY(ID)
+);
+
+CREATE TABLE CategoryLinkMapping(
+    CAT_ID INT NOT NULL,
+    LINK_ID INT NOT NULL,
+    FOREIGN KEY (CAT_ID) REFERENCES Category(ID),
+    FOREIGN KEY (LINK_ID) REFERENCES FirstLink(ID),
+    PRIMARY KEY (CAT_ID, LINK_ID)
+);
+
+CREATE TABLE Data(
+    ID INT AUTO_INCREMENT,
+    LINK VARCHAR(200) NOT NULL,
+    TITLE VARCHAR(200),
+    CONTENT TEXT,
+    PRIMARY KEY(ID)
+);
+
+INSERT INTO Category(NAME, DESCRIPTION) VALUES ('Báo chí', 'Loài báo');
+
+INSERT INTO FirstLink(Link, DESCRIPTION) VALUES ('https://dantri.com.vn/', 'dân trí');
+INSERT INTO FirstLink(Link, DESCRIPTION) VALUES ('https://vnexpress.net/', 'VN Express');
+INSERT INTO FirstLink(Link, DESCRIPTION) VALUES ('https://genk.vn/', 'Công nghệ');
+
+INSERT INTO CategoryLinkMapping(LINK_ID, CAT_ID) VALUES (1,1);
+INSERT INTO CategoryLinkMapping(LINK_ID, CAT_ID) VALUES (2,1);
+INSERT INTO CategoryLinkMapping(LINK_ID, CAT_ID) VALUES (3,1);
